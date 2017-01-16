@@ -22,15 +22,15 @@
 </div>
 
 {% if user.is_authenticated %}
-<a class="btn btn-info votebutton" class="sizebut" href="{% url 'dream_vote' pk=post.pk %}"><div id="dream"></div></a>
-<a class="btn btn-danger votebutton" class="sizebut" href="{% url 'nightmare_vote' pk=post.pk %}"><div id="nightmare"></div></a>
+
+    <a class="btn btn-info votebutton" class="sizebut" href="{% url 'dream_vote' pk=post.pk %}"><div class="glyphicon" id="dream"></div></a>
+    <a class="btn btn-danger votebutton" class="sizebut" href="{% url 'nightmare_vote' pk=post.pk %}"><div id="nightmare"></div></a>
 {% endif %}
 <p>{{ post.vote_count_dream }} / {{ post.vote_count_nightmare }}</p>
 <hr>
 <div class = "commentsection">
 <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
 {% for comment in post.comments.all %}
-    {% if user.is_authenticated or comment.approved_comment %}
     <div class="comment">
         <hr class="section-heading-spacer">
         <p>{{ comment.text|linebreaks }}</p>
@@ -38,7 +38,6 @@
           {{ comment.created_date }}
         <hr class="section-heading-spacer">
     </div>
-    {% endif %}
 {% empty %}
     <p>No comments here yet :(</p>
 {% endfor %}
